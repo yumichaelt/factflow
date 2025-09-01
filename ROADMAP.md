@@ -15,6 +15,12 @@
 *   **2. Payment Integration:**
     *   Integrate a payment provider like **Stripe** to handle recurring subscriptions.
     *   Create a checkout page or component where users can upgrade to the Pro tier.
+    *   **Important Note for Stripe Integration:**
+        1.  Store Tier in Stripe: When you create your products in Stripe, add a "tier" key to the metadata. For example, for
+            your "Pro" plan, add metadata: `tier: "pro"`. This will be automatically synced to the `metadata` column in your
+            products table.
+        2.  Query the View: You can now query the `user_profiles_with_tier` view to get a user's subscription tier, which will
+            be `pro`, `free`, or `null`.
 
 *   **3. Subscription Status Webhook:**
     *   Create a new API endpoint (e.g., `/api/stripe-webhook`) to listen for events from Stripe.
